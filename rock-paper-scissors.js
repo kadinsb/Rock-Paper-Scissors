@@ -16,38 +16,9 @@ function getComputerChoice(){
     }
 }
 
-/// write a function that asks for the humans choice, and returns it
-
-// function that gets the users choice
-function getHumanChoice(){
-        //prompt to choose
-        let choice = prompt("Rock paper scissors shoot!")
-
-
-        /// if user doesn't choose, print ("Make your choice Human!")
-        if (choice === null){
-            log.innerText = "Make your choice Human!";
-        }
-
-        /// if user chooses return chosen value
-        else if (choice.toLowerCase() === "rock"){
-            return "rock";
-        }
-        else if (choice.toLowerCase() === "paper"){
-            return "paper";
-        }
-        else if (choice.toLowerCase() === "scissors"){
-            return "scissors";
-        }
-        /// if user types something else tell them to choose one of the three
-        else {
-            prompt("Choose either rock, paper or scissors!")
-        }
-}
 
 /// function to play a round , takes human  & computer choice as arguments
 function playRound(computerChoice, humanChoice){
-
     
 
     ////return draw if human choice and computer choice is the same, eg rock vs rock.
@@ -97,35 +68,97 @@ function playRound(computerChoice, humanChoice){
 
 
 
-function playGame(){
-    /// log computer & human score
-    let computerScore = 0;
-    let humanScore = 0;
+const rock = document.querySelector("#rock");
+const paper = document.querySelector("#paper");
+const scissors = document.querySelector("#scissors");
+const humanSpan = document.querySelector("#humanscore");
+const robotSpan = document.querySelector("#robotscore");
 
-    
-    for (let round = 0; round < 5; round++){
-    
-        let result = playRound(getComputerChoice(), getHumanChoice());
-        if (result === "win"){
-            humanScore++;
-        }
-        if (result === "lose"){
-            computerScore++;
-        }
-        
-    
-    console.log(`Human: ${humanScore}`);
-    console.log(`Robot: ${computerScore}`);
-    }
+
+let humanScore = 0;
+let robotScore = 0;
+
+humanSpan.textContent = humanScore ;
+robotSpan.textContent = robotScore ;
+
+function reset(){
+    humanScore = 0;
+    robotScore = 0;
+    humanSpan.textContent = humanScore ;
+    robotSpan.textContent = robotScore ;
 }
 
-///play a round
 
 
+rock.addEventListener("click", () => {
+    let result = playRound(getComputerChoice(), `rock`);
+    if (result === "win"){
+        humanScore = humanScore + 1;
+        humanSpan.textContent = humanScore ;
+        if (humanScore === 5){
+            alert("Human Wins!!!");
+            reset();
+        }
+
+    }
+    if (result === "lose"){
+        robotScore++;
+        robotSpan.textContent = robotScore ;
+        if (robotScore === 5){
+            alert("YOU LOSE :P !!!");
+            reset();
+        }
+
+    }
+});
+
+paper.addEventListener("click", () => {
+    let result = playRound(getComputerChoice(), `paper`);
+    if (result === "win"){
+        humanScore = humanScore + 1;
+        humanSpan.textContent = humanScore ;
+        if (humanScore === 5){
+            alert("Human Wins!!!");
+            reset();
+        }
+
+    }
+    if (result === "lose"){
+        robotScore++;
+        robotSpan.textContent = robotScore ;
+        if (robotScore === 5){
+            alert("YOU LOSE :P !!!");
+            reset();
+        }
 
 
-console.log(playGame());
+    }
+});
+
+scissors.addEventListener("click", () => {
+        let result = playRound(getComputerChoice(), `scissors`);
+    if (result === "win"){
+        humanScore = humanScore + 1;
+        humanSpan.textContent = humanScore ;
+        if (humanScore === 5){
+            alert("Human Wins!!!");
+            reset();
+        }
+
+    }
+    if (result === "lose"){
+        robotScore++;
+        robotSpan.textContent = robotScore ;
+        if (robotScore === 5){
+            alert("YOU LOSE :P !!!");
+            reset();
+        }
+
+
+    }
+});
+
+
 
     
 
-///console.log(playRound(getComputerChoice(), getHumanChoice()));
